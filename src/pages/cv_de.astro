@@ -1,0 +1,101 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Headline from "../components/headline.astro";
+import TableRow from "../components/TableRow.astro";
+---
+
+<Layout title="CV">
+  <main class="max-w-3xl m-auto">
+    <div class="grid grid-cols-3 items-center my-8">
+      <img
+        class="col-span-1 rounded-full w-32 h-32 border-4 border-primary"
+        src="/benedictbihlmaier.webp"
+        alt="Portrait von Benedict Bihlmaier"
+      />
+      <div class="col-span-2">
+        <h1 class="text-4xl font-medium mb-4">Benedict Bihlmaier</h1>
+        <p class="flex items-center">
+          <img src="/email_icon.svg" class="inline-block w-4 h-4 mr-2" alt="" />
+          <a href="mailto:Benedict.Bihlmaier@gmail.com"
+            >Benedict.Bihlmaier@gmail.com</a
+          >
+        </p>
+      </div>
+    </div>
+    <Headline headingLevel="h2" icon="/profile_icon.svg">Profil</Headline>
+    <p>
+      Mit einem Hintergrund in der Mensch-Computer-Interaktion arbeite ich seit
+      2017 in der digitalen Produkt- und Service-Entwicklung. Bereits während
+      des Studiums begann ich meinen Fokus auf Frontend-Engineering zu legen,
+      kann jedoch in vielen Rollen und Projekten von meinem Wissen aus dem
+      UX-Design profitieren. Der Wunsch nach Abwechslung und Herausforderungen
+      führte mich in die Dienstleistungsbranche. Hier kann ich auf
+      Projekt-Erfahrung in den verschiedensten Industrieen (Automotive,
+      Med-Tech, öffentlicher Sektor u.a.) zurückblicken. Meine Tätigkeiten
+      hierbei umfassen neben dem Schreiben, Testen und Reviewen von Code (primär
+      React.js + Typescript) ebenfalls das Mentoring von junioren Kolleg:innen,
+      sowie eine enge Zusammenarbeit mit Designern. Ich sehe mich als
+      motivierten, kommunikativen Brückenbauer zwischen Disziplinen mit starken
+      Wurzeln im Frontend-Development.
+    </p>
+    <Headline headingLevel="h2" icon="/work_icon.svg">Erfahrung</Headline>
+
+    <table>
+      <TableRow
+        date="05/2019 – bis heute"
+        location="München"
+        title="Creative Technologist designaffairs GmbH / Accenture Song (seit 09/21)"
+        list={[
+          "Hybride Rolle mit Fokus auf Frontend-Entwicklung und besonderem Augenmerk auf die enge Zusammenarbeit mit anderen Disziplinen wie UI- &amp; UX-Design.",
+          "Entwicklung von Frontend-Code für Prototypen bis hin zu Enterprise-Applikationen mit mehreren Teams in agiler Arbeitsweise",
+          "Verantwortlich für Architektur und Umsetzung verschiedener Deliverables (bspw. web-basierte Designsysteme)",
+          "Mentoring von Kolleg:innen",
+        ]}
+      />
+      <TableRow
+        date="04/2018 – 09/2018"
+        location="München"
+        title="Intern Interaction Technology designaffairs GmbH"
+        list={[
+          "Erstellung von UX-Konzepten (Wireframing, User-Journey-Mapping etc.)",
+          "Web-basiertes Prototyping (JavaScript &amp; Vue.js)",
+          "Durchführung von Co-Creation-Workshops mit Kunden",
+        ]}
+      />
+      <TableRow
+        date="05/2017 – 01/2019"
+        location="Würzburg"
+        title="Working Student Frontend Development webfellows UG"
+        list={[
+          "Entwicklung von Templates für Online-Shops auf Basis des eCommerce-Systems Shopware",
+          "Konzeptionelle &amp; gestalterische Arbeiten sowie die Umsetzung mittels gängiger Webtechnologien (JavaScript, Smarty/HTML, LESS)",
+          "Backend-orientierte Arbeit innerhalb der Shopware-Umgebung. Dazu gehörte die Entwicklung von Plugins zur Erweiterung der Shop-Funktionalität mit Technologien wie PHP und ExtJs.",
+        ]}
+      />
+    </table>
+
+    <Headline headingLevel="h2" icon="/work_icon.svg">Ausbildung</Headline>
+    <table>
+      <tr>
+        <td>2015 – 2019 Würzburg</td>
+        <td>
+          Mensch-Computer-Systeme (Human-Computer-Systems) | Bachelor of Science
+          Julius-Maximilians-Universität
+        </td>
+      </tr>
+    </table>
+    <Headline headingLevel="h2" icon="/work_icon.svg">Skills</Headline>
+    <ul>
+      <li>React.js - EXZELLENT</li>
+      <li>JavaScript - EXZELLENT</li>
+      <li>Typescript - FORTGESCHRITTEN</li>
+      <li>HTML - EXZELLENT</li>
+      <li>CSS - EXZELLENT</li>
+      <li>Git - EXZELLENT</li>
+      <li>UX Design - FORTGESCHRITTEN</li>
+      <li>Design & Entwicklung für Barrierefreiheit - FORTGESCHRITTEN</li>
+      <li>GraphQL - GRUNDKENNTNISSE</li>
+      <li>Python - GRUNDKENNTNISSE</li>
+    </ul>
+  </main>
+</Layout>

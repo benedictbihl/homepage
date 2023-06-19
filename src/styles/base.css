@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --sapphire: 64 89 173;
+    --blue-gray: 107 154 196;
+    --tiffany-blue: 151 216 196;
+    --antiflash-white: 239 242 241;
+    --xanthous: 244 185 66;
+  }
+}

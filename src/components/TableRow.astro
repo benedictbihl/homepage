@@ -1,0 +1,20 @@
+---
+export interface Props {
+  date: string;
+  location: string;
+  title: string;
+  list: string[];
+}
+
+const { date, location, title, list } = Astro.props;
+---
+
+<tr class="align-top">
+  <td>{date} {location}</td>
+  <td>
+    <span> {title}</span>
+    <ul class="list-disc">
+      {list.map((item) => <li>{item}</li>)}
+    </ul></td
+  >
+</tr>
