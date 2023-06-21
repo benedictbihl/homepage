@@ -4,10 +4,10 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				background: 'rgb(var(--xanthous) / <alpha-value>)',
+				background: 'rgb(var(--background) / <alpha-value>)',
 				white: 'rgb(var(--antiflash-white) / <alpha-value>)',
-				primary: 'rgb(var(--sapphire) / <alpha-value>)',
-				secondary: 'rgb(var(--blue-gray) / <alpha-value>)',
+				primary: 'rgb(var(--primary) / <alpha-value>)',
+				secondary: 'rgb(var(--secondary) / <alpha-value>)',
 				accent: 'rgb(var(--tiffany-blue) / <alpha-value>)',
 			}
 		}

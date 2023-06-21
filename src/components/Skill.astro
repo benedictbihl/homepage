@@ -1,0 +1,19 @@
+---
+interface Props {
+  name: string;
+  proficiency: 1 | 2 | 3;
+}
+
+const { name, proficiency } = Astro.props;
+---
+
+<li>
+  <span class="font-medium">{name}</span>
+  <span>
+    {
+      Array.from({ length: proficiency }).map((_, index) => (
+        <span class="text-secondary">★</span>
+      ))
+    }
+  </span>
+</li>

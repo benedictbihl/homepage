@@ -1,63 +1,107 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import LayoutCV from "../layouts/LayoutCV.astro";
+import Headline from "../components/headline.astro";
+import TableRow from "../components/TableRow.astro";
+import Skill from "../components/Skill.astro";
 ---
 
-<Layout title="CV">
-  <main class="max-w-7xl">
-    <h1>Benedict Bihlmaier</h1>
-    <p>
-      <a href="mailto:Benedict.Bihlmaier@gmail.com"
-        >Benedict.Bihlmaier@gmail.com</a
-      >
-    </p>
-    <h2>Profil</h2>
-    <p>
-      With a background in human-computer interaction, I have been working in
-      digital product and service development since 2017. Already during my
-      studies, I began to focus on frontend engineering, but can benefit from my
-      knowledge of UX design in many roles and projects. The desire for variety
-      and challenges led me to the service industry. Here I can look back on
-      project experience in a wide variety of industries (automotive, med-tech,
-      public sector, among others). In addition to writing, testing, and
-      reviewing code (primarily React.js + Typescript), my activities also
-      include mentoring junior colleagues and working closely with designers. I
-      see myself as a motivated, communicative bridge builder between
-      disciplines with strong roots in frontend development.
-    </p>
-    <h2>Erfahrung</h2>
-    <table>
-      <tr>
-        <td>05/2019 – present Munich</td>
-        <td>
-          Creative Technologist designaffairs GmbH / Accenture Song (since
-          09/21)
-          <ul>
-            <li>
-              Hybrid role with a focus on frontend development and special
-              attention to close collaboration with other disciplines such as UI
-              &amp; UX design.
-            </li>
-            <li>
-              Development of frontend code for prototypes up to enterprise
-              applications with multiple teams in agile working methods
-            </li>
-            <li>
-              Responsible for architecture and implementation of various
-              deliverables (e.g. web-based design systems)
-            </li>
-            <li>Mentoring of colleagues</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td>04/2018 – 09/2018 Munich</td>
-        <td>
-          Intern Interaction Technology designaffairs GmbH
-          <ul>
-            <li></li>
-          </ul></td
-        ></tr
-      >
-    </table>
-  </main>
-</Layout>
+<LayoutCV title="CV">
+  <div class="grid grid-cols-3 items-center mb-12">
+    <img
+      class="col-span-1 rounded-full w-32 h-32 border-4 border-primary"
+      src="/benedictbihlmaier.webp"
+      alt="Portrait von Benedict Bihlmaier"
+    />
+    <div class="col-span-2">
+      <h1 class="text-4xl font-medium mb-4">Benedict Bihlmaier EN</h1>
+      <p class="flex items-center">
+        <img src="/email_icon.svg" class="inline-block w-4 h-4 mr-2" alt="" />
+        <a class="hover:text-primary" href="mailto:Benedict.Bihlmaier@gmail.com"
+          >Benedict.Bihlmaier@gmail.com</a
+        >
+      </p>
+    </div>
+  </div>
+  <Headline headingLevel="h2" icon="/profile_icon.svg">Profil</Headline>
+  <p>
+    Mit einem Hintergrund in der Mensch-Computer-Interaktion arbeite ich seit
+    2017 in der digitalen Produkt- und Service-Entwicklung. Bereits während des
+    Studiums begann ich meinen Fokus auf Frontend-Engineering zu legen, kann
+    jedoch in vielen Rollen und Projekten von meinem Wissen aus dem UX-Design
+    profitieren. Der Wunsch nach Abwechslung und Herausforderungen führte mich
+    in die Dienstleistungsbranche. Hier kann ich auf Projekt-Erfahrung in den
+    verschiedensten Industrieen (Automotive, Med-Tech, öffentlicher Sektor u.a.)
+    zurückblicken. Meine Tätigkeiten hierbei umfassen neben dem Schreiben,
+    Testen und Reviewen von Code (primär React.js + Typescript) ebenfalls das
+    Mentoring von junioren Kolleg:innen, sowie eine enge Zusammenarbeit mit
+    Designern. Ich sehe mich als motivierten, kommunikativen Brückenbauer
+    zwischen Disziplinen mit starken Wurzeln im Frontend-Development.
+  </p>
+  <Headline headingLevel="h2" icon="/work_icon.svg">Erfahrung</Headline>
+
+  <table class="border-spacing-4">
+    <TableRow
+      date="05/2019 - heute"
+      location="München"
+      company="designaffairs GmbH / Accenture (seit 09/21)"
+      title="Senior Creative Technologist"
+      list={[
+        "Hybride Rolle mit Fokus auf Frontend-Entwicklung und besonderem Augenmerk auf die enge Zusammenarbeit mit anderen Disziplinen wie UI- und UX-Design.",
+        "Entwicklung von Frontend-Code für Prototypen bis hin zu Enterprise-Applikationen mit mehreren Teams in agiler Arbeitsweise",
+        "Verantwortlich für Architektur und Umsetzung verschiedener Deliverables (bspw. web-basierte Designsysteme)",
+        "Mentoring von Kolleg:innen",
+      ]}
+    />
+    <TableRow
+      date="04/2018 - 09/2018"
+      location="München"
+      company="designaffairs GmbH"
+      title="Intern Interaction Technology"
+      list={[
+        "Erstellung von UX-Konzepten (Wireframing, User-Journey-Mapping etc.)",
+        "Web-basiertes Prototyping (JavaScript und Vue.js)",
+        "Durchführung von Co-Creation-Workshops mit Kunden",
+      ]}
+    />
+    <TableRow
+      date="05/2017 - 01/2019"
+      location="Würzburg"
+      company="webfellows UG"
+      title="Working Student Frontend Development"
+      list={[
+        "Entwicklung von Templates für Online-Shops auf Basis des eCommerce-Systems Shopware",
+        "Konzeptionelle und gestalterische Arbeiten sowie die Umsetzung mittels gängiger Webtechnologien (JavaScript, Smarty/HTML, LESS)",
+        "Backend-orientierte Arbeit innerhalb der Shopware-Umgebung. Dazu gehörte die Entwicklung von Plugins zur Erweiterung der Shop-Funktionalität mit Technologien wie PHP und ExtJs.",
+      ]}
+    />
+  </table>
+
+  <Headline headingLevel="h2" icon="/education_icon.svg">Ausbildung</Headline>
+
+  <table class="border-spacing-4">
+    <TableRow
+      date="2015 - 2019"
+      location="Würzburg"
+      company="Julius-Maximilians-Universität"
+      title="Mensch-Computer-Systeme (Human-Computer-Systems) B.Sc."
+      list={[
+        "MCS ist ein hybrider Studiengang, der Informatik mit Psychologie und interdisziplinären Kursen kombiniert.",
+        "Abschlussnote: 1,7",
+      ]}
+    />
+  </table>
+
+  <Headline headingLevel="h2" icon="/skills_icon.svg">Skills</Headline>
+  <ul class="grid grid-cols-4 gap-4">
+    <Skill name="React.js" proficiency={3} />
+    <Skill name="JavaScript" proficiency={3} />
+    <Skill name="HTML" proficiency={3} />
+    <Skill name="CSS" proficiency={3} />
+    <Skill name="Git" proficiency={3} />
+    <Skill name="Typescript" proficiency={2} />
+    <Skill name="UX Design" proficiency={2} />
+    <Skill name="Barrierefreiheit" proficiency={2} />
+    <Skill name="GraphQL" proficiency={1} />
+    <Skill name="Python" proficiency={1} />
+  </ul>
+</LayoutCV>

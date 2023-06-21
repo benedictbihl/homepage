@@ -4,10 +4,11 @@
 
 @layer base {
   :root {
-    --sapphire: 64 89 173;
+    --primary: 64 89 173;
+    --secondary: 173 148 64;
     --blue-gray: 107 154 196;
     --tiffany-blue: 151 216 196;
     --antiflash-white: 239 242 241;
-    --xanthous: 244 185 66;
+    --background: 251 243 236;
   }
 }

@@ -1,0 +1,27 @@
+---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // remove the first "/"
+---
+
+<nav class="sticky top-0 px-6 py-4 print:hidden bg-background">
+  <ul class="flex justify-between">
+    <li class="mr-4 hover:text-primary">
+      <a class=`${currentPath === "" && "underline"}` href="/">← Home</a>
+    </li>
+    <span class="flex gap-4">
+      <li>
+        <a
+          class=`hover:text-primary ${currentPath === "cv_en" && "underline"}`
+          href="/cv_en">EN</a
+        >
+      </li>
+      <span> |</span>
+      <li>
+        <a
+          class=`hover:text-primary ${currentPath === "cv_de" && "underline"}`
+          href="/cv_de">DE</a
+        >
+      </li>
+    </span>
+  </ul>
+</nav>

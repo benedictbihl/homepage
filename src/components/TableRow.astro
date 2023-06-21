@@ -3,18 +3,27 @@ export interface Props {
   date: string;
   location: string;
   title: string;
+  company: string;
   list: string[];
 }
 
-const { date, location, title, list } = Astro.props;
+const { date, location, title, list, company } = Astro.props;
 ---
 
-<tr class="align-top">
-  <td>{date} {location}</td>
-  <td>
-    <span> {title}</span>
-    <ul class="list-disc">
-      {list.map((item) => <li>{item}</li>)}
+<tr class="align-top print:break-inside-avoid">
+  <td class="inline-block md:table-cell min-w-[150px]">
+    <div class="inline-block md:block pt-px">
+      {date}
+    </div>
+    <div class="ml-2 before:content-['📍'] inline-block md:block md:ml-0">
+      {location}
+    </div>
+  </td>
+  <td class="inline-block md:table-cell md:pl-4">
+    <h3 class="font-medium text-lg">{title}</h3>
+    <div class="italic md:not-italic mb-2 md:text-md md:mb-4">{company}</div>
+    <ul class="list-disc pb-4">
+      {list.map((item) => <li class="ml-4">{item}</li>)}
     </ul></td
   >
 </tr>
