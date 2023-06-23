@@ -3,6 +3,7 @@ import Headline from "../components/Headline.astro";
 import TableRow from "../components/TableRow.astro";
 import Skill from "../components/Skill.astro";
 import LayoutCV from "../layouts/LayoutCV.astro";
+import { Icon } from "astro-icon";
 ---
 
 <LayoutCV title="CV">
@@ -17,14 +18,18 @@ import LayoutCV from "../layouts/LayoutCV.astro";
         Benedict Bihlmaier
       </h1>
       <p class="text-sm md:text-base flex items-center">
-        <img src="/email_icon.svg" class="inline-block w-4 h-4 mr-2" alt="" />
+        <Icon
+          class="inline-block w-5 h-5 mr-2 text-primary"
+          pack="mdi"
+          name="email"
+        />
         <a class="hover:text-primary" href="mailto:Benedict.Bihlmaier@gmail.com"
           >Benedict.Bihlmaier@gmail.com</a
         >
       </p>
     </div>
   </div>
-  <Headline headingLevel="h2" icon="/profile_icon.svg">Profil</Headline>
+  <Headline headingLevel="h2" icon="account">Profil</Headline>
   <p>
     Mit einem Hintergrund in der Mensch-Computer-Interaktion arbeite ich seit
     2017 in der digitalen Produkt- und Service-Entwicklung. Bereits während des
@@ -39,7 +44,7 @@ import LayoutCV from "../layouts/LayoutCV.astro";
     Designern. Ich sehe mich als motivierten, kommunikativen Brückenbauer
     zwischen Disziplinen mit starken Wurzeln im Frontend-Development.
   </p>
-  <Headline headingLevel="h2" icon="/work_icon.svg">Erfahrung</Headline>
+  <Headline headingLevel="h2" icon="briefcase">Erfahrung</Headline>
 
   <table class="block overflow-x-auto md:table md:border-spacing-4">
     <TableRow
@@ -78,7 +83,7 @@ import LayoutCV from "../layouts/LayoutCV.astro";
     />
   </table>
 
-  <Headline headingLevel="h2" icon="/education_icon.svg">Ausbildung</Headline>
+  <Headline headingLevel="h2" icon="school">Ausbildung</Headline>
 
   <table class="block overflow-x-auto md:table md:border-spacing-4">
     <TableRow
@@ -93,7 +98,7 @@ import LayoutCV from "../layouts/LayoutCV.astro";
     />
   </table>
 
-  <Headline headingLevel="h2" icon="/skills_icon.svg">Skills</Headline>
+  <Headline headingLevel="h2" icon="lightbulb">Skills</Headline>
   <ul class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <Skill name="React.js" proficiency={3} />
     <Skill name="JavaScript" proficiency={3} />

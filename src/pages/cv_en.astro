@@ -1,28 +1,35 @@
 ---
-import LayoutCV from "../layouts/LayoutCV.astro";
 import Headline from "../components/Headline.astro";
 import TableRow from "../components/TableRow.astro";
 import Skill from "../components/Skill.astro";
+import LayoutCV from "../layouts/LayoutCV.astro";
+import { Icon } from "astro-icon";
 ---
 
 <LayoutCV title="CV">
-  <div class="grid grid-cols-3 items-center mb-12">
+  <div class="grid grid-cols-3 items-center mb-6 md:mb-12">
     <img
-      class="col-span-1 rounded-full w-32 h-32 border-4 border-primary"
+      class="col-span-1 rounded-full w-20 h-20 md:w-32 md:h-32 border-4 border-primary"
       src="/benedictbihlmaier.webp"
       alt="Portrait von Benedict Bihlmaier"
     />
     <div class="col-span-2">
-      <h1 class="text-4xl font-medium mb-4">Benedict Bihlmaier EN</h1>
-      <p class="flex items-center">
-        <img src="/email_icon.svg" class="inline-block w-4 h-4 mr-2" alt="" />
+      <h1 class="text-xl mb-2 md:text-4xl md:mb-4 font-medium">
+        Benedict Bihlmaier EN
+      </h1>
+      <p class="text-sm md:text-base flex items-center">
+        <Icon
+          class="inline-block w-5 h-5 mr-2 text-primary"
+          pack="mdi"
+          name="email"
+        />
         <a class="hover:text-primary" href="mailto:Benedict.Bihlmaier@gmail.com"
           >Benedict.Bihlmaier@gmail.com</a
         >
       </p>
     </div>
   </div>
-  <Headline headingLevel="h2" icon="/profile_icon.svg">Profil</Headline>
+  <Headline headingLevel="h2" icon="account">Profil</Headline>
   <p>
     Mit einem Hintergrund in der Mensch-Computer-Interaktion arbeite ich seit
     2017 in der digitalen Produkt- und Service-Entwicklung. Bereits während des
@@ -37,9 +44,9 @@ import Skill from "../components/Skill.astro";
     Designern. Ich sehe mich als motivierten, kommunikativen Brückenbauer
     zwischen Disziplinen mit starken Wurzeln im Frontend-Development.
   </p>
-  <Headline headingLevel="h2" icon="/work_icon.svg">Erfahrung</Headline>
+  <Headline headingLevel="h2" icon="briefcase">Erfahrung</Headline>
 
-  <table class="border-spacing-4">
+  <table class="block overflow-x-auto md:table md:border-spacing-4">
     <TableRow
       date="05/2019 - heute"
       location="München"
@@ -76,9 +83,9 @@ import Skill from "../components/Skill.astro";
     />
   </table>
 
-  <Headline headingLevel="h2" icon="/education_icon.svg">Ausbildung</Headline>
+  <Headline headingLevel="h2" icon="school">Ausbildung</Headline>
 
-  <table class="border-spacing-4">
+  <table class="block overflow-x-auto md:table md:border-spacing-4">
     <TableRow
       date="2015 - 2019"
       location="Würzburg"
@@ -91,8 +98,8 @@ import Skill from "../components/Skill.astro";
     />
   </table>
 
-  <Headline headingLevel="h2" icon="/skills_icon.svg">Skills</Headline>
-  <ul class="grid grid-cols-4 gap-4">
+  <Headline headingLevel="h2" icon="lightbulb">Skills</Headline>
+  <ul class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <Skill name="React.js" proficiency={3} />
     <Skill name="JavaScript" proficiency={3} />
     <Skill name="HTML" proficiency={3} />

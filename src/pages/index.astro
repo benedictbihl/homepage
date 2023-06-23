@@ -1,17 +1,65 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon";
 ---
 
 <Layout title="Benedict Bihlmaier">
-  <div class="max-w-3xl mx-auto text-center md:mt-20">
-    <h1 class="text-4xl md:text-6xl font-medium mb-7">
-      Hi! 👋🏻 Glad you made it here
-    </h1>
-    <p class="text-lg md:text-2xl leading-9">
-      If you want to know more about me, you can <a
-        class="underline hover:text-primary"
-        href="/cv_de">check out my CV</a
-      >, or talk to a virtual version of myself 👇🏻
-    </p>
+  <div class="flex flex-col grow">
+    <div class="max-w-5xl mx-auto text-center mt-8 md:mt-16 grow">
+      <h1 class="text-4xl md:text-6xl font-medium mb-7 md:mb-12">
+        Hi 👋🏻 Glad you made it here!
+      </h1>
+      <p class="text-lg md:text-2xl md:leading-10">
+        I am Benedict, a Software Engineer/UX-Designer hybrid who likes building
+        (sometimes weird) stuff, like this virtual version of myself that you
+        can talk to if you click on the button below 👇🏻
+      </p>
+      <div class="text-lg my-8">🚧 coming soon 🚧</div>
+      <p class="text-lg md:text-2xl md:leading-10">
+        If you want to get in touch with the real me*, you can find me on <a
+          href="https://github.com/benedictbihl"
+          target="_blank"
+          ><Icon
+            class="inline-block w-6 h-6 md:w-10 md:h-10 align-middle hover:text-primary"
+            pack="mdi"
+            name="github"
+          /><span class="sr-only">GitHub</span>
+        </a> or <a
+          href="https://www.linkedin.com/in/benedict-bihlmaier-053515150/"
+          target="_blank"
+        >
+          <Icon
+            class="inline-block w-6 h-6 md:w-10 md:h-10 align-middle hover:text-primary"
+            pack="mdi"
+            name="linkedin"
+          />
+          <span class="sr-only">Linkedin</span>
+        </a>
+        <p class="text-lg md:text-2xl md:leading-10">
+          If you are interested in what i've done work-wise, check out my CV (in <a
+            class="underline hover:text-primary"
+            href="/cv_en">English</a
+          > or in <a class="underline hover:text-primary" href="/cv_de">
+            German</a
+          >
+          )
+        </p>
+      </p>
+    </div>
+    <div class="max-w-5xl mx-auto text-center md:mt-16">
+      <p class="text-sm md:text-lg text-left mt-16">
+        *I aim for this website to be accessible to everyone. So if you find
+        something not working with an assistive technology you are using, please
+        let me know.
+      </p>
+      <p class="text-sm text-left mt-8">
+        Also, i needed some place for my lovely girlfriends baking recipes,
+        since people keep asking me about them. <br />So here you go: <a
+          class="underline hover:text-primary"
+          href="/recipes"
+          >Igas Baking Corner
+        </a>✨
+      </p>
+    </div>
   </div>
 </Layout>
