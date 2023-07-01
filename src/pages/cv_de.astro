@@ -1,7 +1,6 @@
 ---
 import Headline from "../components/Headline.astro";
 import TableRow from "../components/TableRow.astro";
-import Skill from "../components/Skill.astro";
 import LayoutCV from "../layouts/LayoutCV.astro";
 import { Icon } from "astro-icon";
 ---
@@ -101,16 +100,27 @@ import { Icon } from "astro-icon";
   </table>
 
   <Headline headingLevel="h2" icon="lightbulb">Skills</Headline>
-  <ul class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <Skill name="React.js" proficiency={3} />
-    <Skill name="JavaScript" proficiency={3} />
-    <Skill name="HTML" proficiency={3} />
-    <Skill name="CSS" proficiency={3} />
-    <Skill name="Git" proficiency={3} />
-    <Skill name="Typescript" proficiency={2} />
-    <Skill name="UX Design" proficiency={2} />
-    <Skill name="Barrierefreiheit" proficiency={2} />
-    <Skill name="GraphQL" proficiency={1} />
-    <Skill name="Python" proficiency={1} />
+  <h3 class="text-lg mb-1 font-semibold">Kern</h3>
+  <ul class="grid grid-cols-2 md:grid-cols-4 gap-2">
+    <li>Typescript</li>
+    <li>JavaScript</li>
+    <li>(Semantic) HTML</li>
+    <li>CSS/SCSS/Tailwind</li>
+    <li>Versioning (Git)</li>
+    <li>React.js</li>
+    <li>Next.js</li>
+    <li>Agile Development</li>
+    <li>UX Design</li>
+  </ul>
+  <h3 class="text-lg mb-1 mt-6 font-semibold">Angrenzend</h3>
+
+  <ul class="grid grid-cols-2 md:grid-cols-4 gap-2">
+    <li>User Research</li>
+    <li>Wireframing</li>
+    <li>Accessibility</li>
+    <li>Technical Writing</li>
+    <li>Python</li>
+    <li>Vue.js</li>
+    <li>Astro</li>
   </ul>
 </LayoutCV>
