@@ -1,5 +1,5 @@
 ---
-import { ChatContainer } from "../components/VirtualMe/ChatContainer";
+import VirtualMe from "../components/VirtualMe/VirtualMe";
 import Layout from "../layouts/Layout.astro";
 import { Icon } from "astro-icon";
 ---
@@ -16,7 +16,7 @@ import { Icon } from "astro-icon";
         virtual version of myself that you can talk to if you click on the
         button below 👇🏻
       </p>
-      <ChatContainer client:only="react" />
+      <VirtualMe client:only="react" />
       <p class="text-lg md:text-2xl md:leading-10">
         If you want to get in touch with the real me*, you can find me on <a
           href="https://github.com/benedictbihl"

@@ -8,7 +8,8 @@ module.exports = {
 				white: 'rgb(var(--antiflash-white) / <alpha-value>)',
 				primary: 'rgb(var(--primary) / <alpha-value>)',
 				secondary: 'rgb(var(--secondary) / <alpha-value>)',
-				accent: 'rgb(var(--tiffany-blue) / <alpha-value>)',
+				accent1: 'rgb(var(--tiffany-blue) / <alpha-value>)',
+				accent2: 'rgb(var(--xanthous) / <alpha-value>)',
 			}
 		}
 	},
