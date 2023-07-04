@@ -79,11 +79,6 @@ const ChatContainer = () => {
       ref={chatContainerRef}
       className="flex flex-col min-h-[90vh] my-10 mx-16 scroll-m-9"
     >
-      <div className="flex flex-col items-end">
-        <button className="mx-2 p-2 border-2 border-black text-black rounded-full font-semibold hover:text-primary hover:border-primary focus:border-primary">
-          <Icon icon="mdi:restart" className="w-5 h-5" />
-        </button>
-      </div>
       <ul className="grow flex flex-col">
         {convo.map(({ sender, message }, i) => (
           <ChatBubble key={i} sender={sender} content={message} />
@@ -100,7 +95,7 @@ const ChatContainer = () => {
           disabled={inflight}
         />
         <button
-          className="ml-2 p-4 bg-black text-white rounded-full font-semibold hover:bg-primary focus:bg-primary"
+          className="ml-2 p-4 bg-black text-white rounded-full font-semibold disabled:cursor-not-allowed disabled:bg-black hover:bg-primary focus:bg-primary"
           type="submit"
           disabled={inflight || !input}
         >
@@ -109,6 +104,7 @@ const ChatContainer = () => {
           ) : (
             <Icon icon="mdi:send" className="h-5 w-5" />
           )}
+          <span className="sr-only">Ask</span>
         </button>
       </form>
     </div>
