@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ModalProps {
@@ -11,22 +11,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const [isEntering, setIsEntering] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
 
-  const handleEnter = () => {
-    setIsEntering(true);
-  };
-
-  const handleEntered = () => {
-    setIsEntering(false);
-  };
-
-  const handleLeave = () => {
-    setIsLeaving(true);
-  };
-
-  const handleLeft = () => {
-    setIsLeaving(false);
-    onClose();
-  };
+  useEffect(() => {
+    //handle escape key
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [onClose]);
 
   return (
     <>
@@ -36,11 +32,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             isEntering ? "ease-out duration-300 opacity-100" : "opacity-0"
           } ${isLeaving ? "ease-in duration-200 opacity-0" : "opacity-100"}`}
           aria-hidden={!isOpen}
-          onAnimationEnd={isLeaving ? handleLeft : undefined}
+          // onAnimationEnd={isLeaving ? handleLeft : undefined}
         >
           <div
             className="absolute inset-0 bg-black opacity-20"
-            onClick={handleLeave}
+            onClick={() => onClose()}
           ></div>
           <AnimatePresence>
             <motion.div
@@ -50,11 +46,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                 scale: 1,
               }}
               exit={{ opacity: 0, scale: 0 }}
-              className="fixed bg-white rounded-lg shadow-lg p-6 w-1/3"
+              className="fixed bg-white rounded-lg shadow-lg p-6 max-w-lg w-11/12 z-50"
               role="dialog"
               aria-modal="true"
               aria-labelledby="modal-headline"
-              onAnimationEnd={isEntering ? handleEntered : undefined}
+              // onAnimationEnd={isEntering ? handleEntered : undefined}
             >
               {children}
             </motion.div>
