@@ -16,7 +16,10 @@ const ChatContainer = () => {
   const [inflight, setInflight] = useState(false);
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const chatListRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const firstUpdate = useRef(true);
+
   const [convo, setConvo] = useState<ChatMessage[]>([
     {
       sender: "VirtualMe",
@@ -39,18 +42,32 @@ const ChatContainer = () => {
     }
   }, []);
 
+  useEffect(() => {
+    // don't scroll to bottom on first render -> conflict with scrollIntoView
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+
+    //scroll to bottom of chat
+    if (chatListRef.current) {
+      chatListRef.current.scroll({
+        top: chatListRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [chatListRef.current && chatListRef.current.scrollHeight]);
+
   const onSubmit = useCallback(
     async (e: FormEvent) => {
+      let answer = "";
       setInput("");
       setConvo((c) => [...c, { sender: "User", message: input }]);
       e.preventDefault();
       // Prevent multiple requests at once
       if (inflight) return;
 
-      // Reset output
       setInflight(true);
-      setOutput("");
-
       try {
         await fetchEventSource(
           `${import.meta.env.PUBLIC_SUPABASE_URL}/functions/v1/chat`,
@@ -59,7 +76,8 @@ const ChatContainer = () => {
             body: JSON.stringify({ input }),
             headers: { "Content-Type": "application/json" },
             onmessage(ev) {
-              setOutput((o) => o + ev.data);
+              setOutput((o) => o + ev.data); // we use this to show the answer while it's streaming in
+              answer += ev.data; // we use this to save the answer to the convo object
             },
           }
         );
@@ -67,8 +85,12 @@ const ChatContainer = () => {
         console.error(error);
       } finally {
         setInflight(false);
-        setConvo((c) => [...c, { sender: "VirtualMe", message: output }]);
-        inputRef.current?.focus({ preventScroll: true });
+        setOutput("");
+        setConvo((c) => [...c, { sender: "VirtualMe", message: answer }]);
+        if (inputRef.current) {
+          inputRef.current.disabled = false;
+          inputRef.current.focus({ preventScroll: true });
+        }
       }
     },
     [input, inflight, supabase]
@@ -77,14 +99,16 @@ const ChatContainer = () => {
   return (
     <div
       ref={chatContainerRef}
-      className="flex flex-col min-h-[90vh] my-10 mx-16 scroll-m-9"
+      className="flex flex-col h-[90vh] my-10 md:mx-16 scroll-m-9"
     >
-      <ul className="grow flex flex-col">
+      <ul ref={chatListRef} className="overflow-y-auto flex flex-col grow px-2">
         {convo.map(({ sender, message }, i) => (
           <ChatBubble key={i} sender={sender} content={message} />
         ))}
+        {/* while the answer is streaming in, use the output to show it directly */}
+        {output && <ChatBubble sender="VirtualMe" content={output} />}
       </ul>
-      <form onSubmit={onSubmit} className="flex">
+      <form onSubmit={onSubmit} className="flex mt-2">
         <input
           ref={inputRef}
           type="text"
@@ -97,7 +121,7 @@ const ChatContainer = () => {
         <button
           className="ml-2 p-4 bg-black text-white rounded-full font-semibold disabled:cursor-not-allowed disabled:bg-black hover:bg-primary focus:bg-primary"
           type="submit"
-          disabled={inflight || !input}
+          disabled={inflight}
         >
           {inflight ? (
             <Icon icon="mdi:loading" className="animate-spin h-5 w-5" />
