@@ -1,26 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState, useRef } from "react";
 import ChatContainer from "./ChatContainer";
 import Modal from "./Modal";
 
 const VirtualMe = () => {
   const [showChatContainer, setShowChatContainer] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    return () => {};
-  }, []);
+  const confirmButtonRef = useRef<HTMLButtonElement>(null);
 
   return showChatContainer ? (
     <ChatContainer />
   ) : (
-    <div>
+    <div className="grow flex flex-col items-center justify-center">
       <button
-        className="bg-black text-white rounded-full hover:bg-primary focus:bg-primary px-4 py-2 my-8"
+        className="bg-black text-white rounded-full hover:bg-primary focus:bg-primary px-4 py-2 w-fit"
         onClick={() => setShowModal(true)}
       >
         Talk to me
       </button>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+      <Modal
+        onOpen={() => {
+          if (confirmButtonRef.current) {
+            confirmButtonRef.current.focus({ preventScroll: true });
+          }
+        }}
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+      >
         <span className="font-medium text-lg">
           ☝🏻 Before we start, please read the following:
         </span>
@@ -52,6 +57,7 @@ const VirtualMe = () => {
             I'd rather not
           </button>
           <button
+            ref={confirmButtonRef}
             className="bg-black text-white rounded-full hover:bg-primary focus:bg-primary px-4 py-2 mt-4"
             onClick={() => {
               setShowModal(false);

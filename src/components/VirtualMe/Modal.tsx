@@ -4,12 +4,17 @@ import { motion, AnimatePresence } from "framer-motion";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpen?: () => void;
   children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  const [isEntering, setIsEntering] = useState(false);
-  const [isLeaving, setIsLeaving] = useState(false);
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onOpen, children }) => {
+  const [isEntering] = useState(false);
+  const [isLeaving] = useState(false);
+
+  useEffect(() => {
+    onOpen && isOpen && onOpen();
+  }, [isOpen]);
 
   useEffect(() => {
     //handle escape key
