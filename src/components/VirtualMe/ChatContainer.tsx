@@ -1,32 +1,28 @@
 import { FormEvent, useCallback, useState, useEffect, useRef } from "react";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
+import { HumanMessage, AIMessage } from "langchain/schema";
+import { ChatMessageHistory } from "langchain/stores/message/in_memory";
 
 import { supabase } from "../../supabase";
 import ChatBubble from "./ChatBubble";
 import { Icon } from "@iconify/react";
 
-type ChatMessage = {
-  sender: "VirtualMe" | "User";
-  message: string;
-};
-
 const ChatContainer = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [inflight, setInflight] = useState(false);
-
+  const [conversationHistory, setConversationHistory] =
+    useState<ChatMessageHistory>(new ChatMessageHistory());
+  const [chatBubbles, setChatBubbles] = useState<JSX.Element[]>([
+    <ChatBubble
+      key={0}
+      message="Hi, I am Benedicts virtual representation. He told me quite some things about himself, so I can answer some questions about him. Try it out!"
+    />,
+  ]);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const chatListRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const firstUpdate = useRef(true);
-
-  const [convo, setConvo] = useState<ChatMessage[]>([
-    {
-      sender: "VirtualMe",
-      message:
-        "Hello, I'm the virtual representation of Benedict. While you might not reach him directly, I can answer some initial questions for you.",
-    },
-  ]);
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -62,22 +58,33 @@ const ChatContainer = () => {
     async (e: FormEvent) => {
       let answer = "";
       setInput("");
-      setConvo((c) => [...c, { sender: "User", message: input }]);
+      setConversationHistory((c) => {
+        c.addUserMessage(input);
+        return c;
+      });
+      setChatBubbles((c) => [
+        ...c,
+        <ChatBubble key={c.length} message={new HumanMessage(input)} />,
+      ]);
       e.preventDefault();
       // Prevent multiple requests at once
       if (inflight) return;
 
       setInflight(true);
       try {
+        const history = await conversationHistory.getMessages();
         await fetchEventSource(
           `${import.meta.env.PUBLIC_SUPABASE_URL}/functions/v1/chat`,
           {
             method: "POST",
-            body: JSON.stringify({ input }),
+            body: JSON.stringify({
+              input: input,
+              history: history,
+            }),
             headers: { "Content-Type": "application/json" },
             onmessage(ev) {
               setOutput((o) => o + ev.data); // we use this to show the answer while it's streaming in
-              answer += ev.data; // we use this to save the answer to the convo object
+              answer += ev.data; // we use this to save the answer to the conversation object
             },
           }
         );
@@ -86,7 +93,14 @@ const ChatContainer = () => {
       } finally {
         setInflight(false);
         setOutput("");
-        setConvo((c) => [...c, { sender: "VirtualMe", message: answer }]);
+        setConversationHistory((c) => {
+          c.addAIChatMessage(answer);
+          return c;
+        });
+        setChatBubbles((c) => [
+          ...c,
+          <ChatBubble key={c.length} message={new AIMessage(answer)} />,
+        ]);
         if (inputRef.current) {
           inputRef.current.disabled = false;
           inputRef.current.focus({ preventScroll: true });
@@ -102,11 +116,9 @@ const ChatContainer = () => {
       className="flex flex-col h-[90vh] my-10 md:mx-16 scroll-m-9"
     >
       <ul ref={chatListRef} className="overflow-y-auto flex flex-col grow px-2">
-        {convo.map(({ sender, message }, i) => (
-          <ChatBubble key={i} sender={sender} content={message} />
-        ))}
+        {chatBubbles}
         {/* while the answer is streaming in, use the output to show it directly */}
-        {output && <ChatBubble sender="VirtualMe" content={output} />}
+        {output && <ChatBubble message={new AIMessage(output)} />}
       </ul>
       <form onSubmit={onSubmit} className="flex mt-2">
         <input
