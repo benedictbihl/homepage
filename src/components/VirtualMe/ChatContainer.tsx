@@ -25,6 +25,8 @@ const ChatContainer = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const firstUpdate = useRef(true);
 
+  const isTouchDevice = "ontouchstart" in window;
+
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollIntoView({
@@ -33,7 +35,7 @@ const ChatContainer = () => {
         inline: "nearest",
       });
 
-      if (inputRef.current) {
+      if (!isTouchDevice && inputRef.current) {
         inputRef.current.focus({ preventScroll: true });
       }
     }

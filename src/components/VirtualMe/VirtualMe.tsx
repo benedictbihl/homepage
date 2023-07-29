@@ -12,7 +12,7 @@ const VirtualMe = () => {
   ) : (
     <div className="grow flex flex-col items-center justify-center">
       <button
-        className="bg-black text-white rounded-full hover:bg-primary focus:bg-primary px-4 py-2 w-fit"
+        className="bg-black text-white rounded-full hover:bg-primary focus:bg-primary my-4 px-4 py-2 w-fit"
         onClick={() => setShowModal(true)}
       >
         Talk to me
