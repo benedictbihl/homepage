@@ -16,8 +16,9 @@ const ChatContainer = () => {
   const [chatBubbles, setChatBubbles] = useState<JSX.Element[]>([
     <ChatBubble
       key={0}
-      message="Hi, I am Benedicts virtual representation. He told me quite some things about himself, so I can answer some questions about him. Try it out!"
+      message="Hi, I am Benedicts virtual surrogate. He told me some things about himself, so I can answer questions about him. I suggest you ask about things like hobbies, music or work stuff. Try it out!"
     />,
+    <ChatBubble key={1} message="Feel free to adress me as if I were him." />,
   ]);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const chatListRef = useRef<HTMLUListElement>(null);

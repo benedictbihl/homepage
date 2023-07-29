@@ -31,6 +31,16 @@ const VirtualMe = () => {
         </span>
         <ol className="list-decimal list-inside mt-6 ">
           <li className="pb-4">
+            You are not talking to a real person, but a large language model.
+            LLMs are known to make things up at times, so please don't take
+            everything that is said seriously.
+          </li>
+          <li className="pb-4">
+            <span className="font-medium">This is very early stage.</span> I
+            supplied far too less data about myself to enable deep
+            conversations. It's still a lot of fun though!
+          </li>
+          <li className="pb-4">
             Everything you type here will be processed by OpenAIs servers. They
             do not use these conversations for training, but your input will be
             stored on their servers for 30 days. Check the{" "}
@@ -38,15 +48,6 @@ const VirtualMe = () => {
               imprint
             </a>{" "}
             for more information.
-          </li>
-          <li className="pb-4">
-            You are not talking to a real person, but a large language model.
-            LLMs are known to make up things a times, so please don't take
-            everything that is said seriously.
-          </li>
-          <li>
-            This is an experiment, so I might not be able to answer all of your
-            questions.
           </li>
         </ol>
         <div className="flex gap-4 justify-center mt-2">
