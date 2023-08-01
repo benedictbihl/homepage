@@ -11,6 +11,9 @@ const ChatContainer = () => {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [inflight, setInflight] = useState(false);
+  const isTouchDevice = "ontouchstart" in window;
+  const [scrollHeight] = useState(document.body.scrollHeight);
+
   const [conversationHistory, setConversationHistory] =
     useState<ChatMessageHistory>(new ChatMessageHistory());
   const [chatBubbles, setChatBubbles] = useState<JSX.Element[]>([
@@ -23,18 +26,9 @@ const ChatContainer = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const chatListRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const firstUpdate = useRef(true);
-
-  const isTouchDevice = "ontouchstart" in window;
 
   useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-        inline: "nearest",
-      });
-
+    if (inputRef.current) {
       if (!isTouchDevice && inputRef.current) {
         inputRef.current.focus({ preventScroll: true });
       }
@@ -42,20 +36,22 @@ const ChatContainer = () => {
   }, []);
 
   useEffect(() => {
-    // don't scroll to bottom on first render -> conflict with scrollIntoView
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
+    // console.log(chatContainerRef.current?.scrollHeight);
+    console.log(chatListRef.current?.scrollHeight);
+    console.log(document.body.scrollHeight);
 
-    //scroll to bottom of chat
-    if (chatListRef.current) {
-      chatListRef.current.scroll({
-        top: chatListRef.current.scrollHeight,
+    //scroll window to bottom, smooth
+    if (chatListRef.current!.scrollHeight > scrollHeight) {
+      window.scrollTo({
+        top: document.body.scrollHeight + 100,
         behavior: "smooth",
       });
     }
-  }, [chatListRef.current && chatListRef.current.scrollHeight]);
+  }, [
+    chatContainerRef.current,
+    chatContainerRef.current?.scrollHeight,
+    chatBubbles,
+  ]);
 
   const onSubmit = useCallback(
     async (e: FormEvent) => {
@@ -116,35 +112,40 @@ const ChatContainer = () => {
   return (
     <div
       ref={chatContainerRef}
-      className="flex flex-col h-[90vh] my-10 md:mx-16 scroll-m-9"
+      className="flex flex-col  md:mx-auto max-w-3xl justify-between"
     >
-      <ul ref={chatListRef} className="overflow-y-auto flex flex-col grow px-2">
+      <ul ref={chatListRef} className="pt-[56px] pb-[96px] flex flex-col px-2">
         {chatBubbles}
         {/* while the answer is streaming in, use the output to show it directly */}
         {output && <ChatBubble message={new AIMessage(output)} />}
       </ul>
-      <form onSubmit={onSubmit} className="flex mt-2">
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Ask..."
-          className="grow px-4 border-2 border-black rounded-full"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          disabled={inflight}
-        />
-        <button
-          className="ml-2 p-4 bg-black text-white rounded-full font-semibold disabled:cursor-not-allowed disabled:bg-black hover:bg-primary focus:bg-primary"
-          type="submit"
-          disabled={inflight}
-        >
-          {inflight ? (
-            <Icon icon="mdi:loading" className="animate-spin h-5 w-5" />
-          ) : (
-            <Icon icon="mdi:send" className="h-5 w-5" />
-          )}
-          <span className="sr-only">Ask</span>
-        </button>
+      <form
+        onSubmit={onSubmit}
+        className="flex mt-2 fixed left-0 bottom-[56px] pb-[4px] w-3xl bg-background w-full"
+      >
+        <div className="flex w-full px-4 md:w-[48rem] mx-auto">
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="Ask..."
+            className="grow px-4 border-2 border-black rounded-full "
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            disabled={inflight}
+          />
+          <button
+            className="ml-2 p-4 bg-black text-white rounded-full font-semibold disabled:cursor-not-allowed disabled:bg-black hover:bg-primary focus:bg-primary"
+            type="submit"
+            disabled={inflight}
+          >
+            {inflight ? (
+              <Icon icon="mdi:loading" className="animate-spin h-5 w-5" />
+            ) : (
+              <Icon icon="mdi:send" className="h-5 w-5" />
+            )}
+            <span className="sr-only">Ask</span>
+          </button>
+        </div>
       </form>
     </div>
   );

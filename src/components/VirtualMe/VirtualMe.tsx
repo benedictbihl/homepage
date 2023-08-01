@@ -3,13 +3,11 @@ import ChatContainer from "./ChatContainer";
 import Modal from "./Modal";
 
 const VirtualMe = () => {
-  const [showChatContainer, setShowChatContainer] = useState(false);
+  // const [showChatContainer, setShowChatContainer] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const confirmButtonRef = useRef<HTMLButtonElement>(null);
 
-  return showChatContainer ? (
-    <ChatContainer />
-  ) : (
+  return (
     <div className="grow flex flex-col items-center justify-center">
       <button
         className="bg-black text-white rounded-full hover:bg-primary focus:bg-primary my-4 px-4 py-2 w-fit"
@@ -60,12 +58,8 @@ const VirtualMe = () => {
           <button
             ref={confirmButtonRef}
             className="bg-black text-white rounded-full hover:bg-primary focus:bg-primary px-4 py-2 mt-4"
-            onClick={() => {
-              setShowModal(false);
-              setShowChatContainer(true);
-            }}
           >
-            Sounds Good!
+            <a href="/talktome">Sounds Good!</a>
           </button>
         </div>
       </Modal>

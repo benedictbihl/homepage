@@ -1,7 +1,13 @@
 ---
+export interface Props {
+  className?: string;
+}
+const { className } = Astro.props;
 ---
 
-<footer class="px-6 py-4 print:hidden bg-background flex justify-center">
+<footer
+  class={`${className} px-6 py-4 print:hidden bg-background flex justify-center`}
+>
   <nav>
     <ul>
       <li class="hover:text-primary">
