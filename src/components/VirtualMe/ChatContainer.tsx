@@ -6,6 +6,7 @@ import { ChatMessageHistory } from "langchain/stores/message/in_memory";
 import { supabase } from "../../supabase";
 import ChatBubble from "./ChatBubble";
 import { Icon } from "@iconify/react";
+import { v4 as uuidv4 } from "uuid";
 
 const ChatContainer = () => {
   const [input, setInput] = useState("");
@@ -13,6 +14,7 @@ const ChatContainer = () => {
   const [inflight, setInflight] = useState(false);
   const isTouchDevice = "ontouchstart" in window;
   const [scrollHeight] = useState(document.body.scrollHeight);
+  const [conversationID] = useState(uuidv4());
 
   const [conversationHistory, setConversationHistory] =
     useState<ChatMessageHistory>(new ChatMessageHistory());
@@ -75,6 +77,7 @@ const ChatContainer = () => {
             body: JSON.stringify({
               input: input,
               history: history,
+              conversationID: conversationID,
             }),
             headers: { "Content-Type": "application/json" },
             onmessage(ev) {
