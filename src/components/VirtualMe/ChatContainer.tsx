@@ -36,10 +36,6 @@ const ChatContainer = () => {
   }, []);
 
   useEffect(() => {
-    // console.log(chatContainerRef.current?.scrollHeight);
-    console.log(chatListRef.current?.scrollHeight);
-    console.log(document.body.scrollHeight);
-
     //scroll window to bottom, smooth
     if (chatListRef.current!.scrollHeight > scrollHeight) {
       window.scrollTo({
