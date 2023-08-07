@@ -2,6 +2,7 @@ import { FormEvent, useCallback, useState, useEffect, useRef } from "react";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { HumanMessage, AIMessage } from "langchain/schema";
 import { ChatMessageHistory } from "langchain/stores/message/in_memory";
+import Disclaimer from "./Disclaimer";
 
 import { supabase } from "../../supabase";
 import ChatBubble from "./ChatBubble";
@@ -31,14 +32,6 @@ const ChatContainer = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const chatListRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      if (!isTouchDevice && inputRef.current) {
-        inputRef.current.focus({ preventScroll: true });
-      }
-    }
-  }, []);
 
   useEffect(() => {
     //scroll window to bottom, smooth
@@ -112,44 +105,58 @@ const ChatContainer = () => {
   );
 
   return (
-    <div
-      ref={chatContainerRef}
-      className="flex flex-col  md:mx-auto max-w-3xl justify-between"
-    >
-      <ul ref={chatListRef} className="pt-[56px] pb-[96px] flex flex-col px-2">
-        {chatBubbles}
-        {/* while the answer is streaming in, use the output to show it directly */}
-        {output && <ChatBubble message={new AIMessage(output)} />}
-      </ul>
-      <form
-        onSubmit={onSubmit}
-        className="flex mt-2 fixed left-0 bottom-[56px] pb-[4px] w-3xl bg-background w-full"
+    <>
+      <Disclaimer
+        onConfirm={() => {
+          if (inputRef.current) {
+            if (!isTouchDevice && inputRef.current) {
+              inputRef.current.focus({ preventScroll: true });
+            }
+          }
+        }}
+      />
+      <div
+        ref={chatContainerRef}
+        className="flex flex-col md:mx-auto max-w-3xl justify-between"
       >
-        <div className="flex w-full px-4 md:w-[48rem] mx-auto">
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder="Ask..."
-            className="grow px-4 border-2 border-black rounded-full "
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            disabled={inflight}
-          />
-          <button
-            className="ml-2 p-4 bg-black text-white rounded-full font-semibold disabled:cursor-not-allowed disabled:bg-black hover:bg-primary focus:bg-primary"
-            type="submit"
-            disabled={inflight}
-          >
-            {inflight ? (
-              <Icon icon="mdi:loading" className="animate-spin h-5 w-5" />
-            ) : (
-              <Icon icon="mdi:send" className="h-5 w-5" />
-            )}
-            <span className="sr-only">Ask</span>
-          </button>
-        </div>
-      </form>
-    </div>
+        <ul
+          ref={chatListRef}
+          className="pt-[56px] pb-[96px] flex flex-col px-2"
+        >
+          {chatBubbles}
+          {/* while the answer is streaming in, use the output to show it directly */}
+          {output && <ChatBubble message={new AIMessage(output)} />}
+        </ul>
+        <form
+          onSubmit={onSubmit}
+          className="flex mt-2 fixed left-0 bottom-[56px] pb-[4px] w-3xl bg-background w-full"
+        >
+          <div className="flex w-full px-4 md:w-[48rem] mx-auto">
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Ask..."
+              className="grow px-4 border-2 border-black rounded-full "
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={inflight}
+            />
+            <button
+              className="ml-2 p-4 bg-black text-white rounded-full font-semibold disabled:cursor-not-allowed disabled:bg-black hover:bg-primary focus:bg-primary"
+              type="submit"
+              disabled={inflight}
+            >
+              {inflight ? (
+                <Icon icon="mdi:loading" className="animate-spin h-5 w-5" />
+              ) : (
+                <Icon icon="mdi:send" className="h-5 w-5" />
+              )}
+              <span className="sr-only">Ask</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

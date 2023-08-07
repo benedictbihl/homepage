@@ -1,75 +1,63 @@
 ---
-import VirtualMe from "../components/VirtualMe/VirtualMe";
 import Layout from "../layouts/Layout.astro";
 import { Icon } from "astro-icon";
 ---
 
 <Layout title="Benedict Bihlmaier">
-  <div class="flex flex-col grow">
-    <div class="max-w-5xl mx-auto text-center mt-8 md:mt-16 grow flex flex-col">
-      <h1 class="text-4xl md:text-6xl font-medium mb-7 md:mb-12">
-        Hi 👋🏻 Glad you made it here!
-      </h1>
-      <p class="text-lg md:text-2xl md:leading-10">
-        I am Benedict, a software engineer with a focus on frontend and user
-        experience work.
-      </p>
-      <p class="text-lg md:text-2xl md:leading-10">
-        New tech excites me, so I build stuff with it. My most recent rabbit
-        hole led to this virtual surrogate of myself. Try it here 👇🏻
-      </p>
-      <VirtualMe client:only="react" />
-    </div>
-    <div class="max-w-5xl mx-auto text-center">
-      <p class="text-lg md:text-2xl md:leading-10">
-        If you want to get in touch with the real me*, you can find me on <a
-          href="https://github.com/benedictbihl"
-          target="_blank"
-          ><Icon
-            aria-hidden="true"
-            focusable="false"
-            class="inline-block w-6 h-6 md:w-10 md:h-10 align-middle hover:text-primary focus:text-primary"
-            pack="mdi"
-            name="github"
-          /><span class="sr-only">GitHub</span>
-        </a> or <a
-          href="https://www.linkedin.com/in/benedict-bihlmaier-053515150/"
-          target="_blank"
-        >
-          <Icon
-            aria-hidden="true"
-            focusable="false"
-            class="inline-block w-6 h-6 md:w-10 md:h-10 align-middle hover:text-primary focus:text-primary"
-            pack="mdi"
-            name="linkedin"
-          />
-          <span class="sr-only">Linkedin</span>
-        </a>
-        <p class="text-lg md:text-2xl md:leading-10">
-          If you are interested in what I've done work-wise, check out my CV (in <a
-            class="underline hover:text-primary focus:text-primary"
-            href="/cv_en">English</a
-          > or in <a
-            class="underline hover:text-primary focus:text-primary"
-            href="/cv_de"
-          >
-            German</a
-          >)
-        </p>
-      </p>
-      <p class="text-sm md:text-lg mt-4">
-        *I aim for this website to be accessible to everyone. If you find
-        something not playing great with an assistive technology you use, please
-        let me know.
-      </p>
-      <p class="text-sm md:text-base mt-8">
-        Also, this space serves as a place for my girlfriends' baking recipes,
-        since people keep asking about them. <br />So here you go: <a
-          class="underline hover:text-primary focus:text-primary"
-          href="/recipes"
-          >Igas Baking Corner
-        </a>✨
-      </p>
-    </div>
+  <div class="max-w-5xl mx-auto text-center mt-8 md:mt-16 grow flex flex-col">
+    <h1 class="text-4xl md:text-6xl font-medium mb-7 md:mb-12">
+      Hi 👋🏻 Glad you made it here!
+    </h1>
+    <p class="text-lg md:text-2xl md:leading-10">
+      I am Benedict, a software engineer with a focus on frontend and user
+      experience work.
+    </p>
+    <p class="text-lg md:text-2xl md:leading-10 inline-block mb-12">
+      New tech excites me, so I build stuff with it. My most recent rabbit hole
+      led me to create this virtual representative of myself. <a
+        class="w-0 text-lg md:text-2xl md:leading-10 underline hover:text-primary focus:text-primary"
+        href="/talktome"
+      >
+        Please try it here 👏🏻
+      </a>
+    </p>
+    <p class="text-lg md:text-2xl md:leading-10">
+      If you want to get in touch with the real me*, you can find me on <a
+        href="https://github.com/benedictbihl"
+        target="_blank"
+        ><Icon
+          aria-hidden="true"
+          focusable="false"
+          class="inline-block w-6 h-6 md:w-10 md:h-10 align-middle hover:text-primary focus:text-primary"
+          pack="mdi"
+          name="github"
+        /><span class="sr-only">GitHub</span>
+      </a> or <a
+        href="https://www.linkedin.com/in/benedict-bihlmaier-053515150/"
+        target="_blank"
+      >
+        <Icon
+          aria-hidden="true"
+          focusable="false"
+          class="inline-block w-6 h-6 md:w-10 md:h-10 align-middle hover:text-primary focus:text-primary"
+          pack="mdi"
+          name="linkedin"
+        />
+        <span class="sr-only">Linkedin</span>
+      </a>
+    </p>
+    <p class="text-sm md:text-lg mt-4">
+      *I aim for this website to be accessible to everyone. If you find
+      something not playing great with an assistive technology you use, please
+      let me know.
+    </p>
+    <p class="text-sm md:text-base mt-8">
+      Also, this space serves as a place for my girlfriends' baking recipes,
+      since people keep asking about them. <br />So here you go: <a
+        class="underline hover:text-primary focus:text-primary"
+        href="/recipes"
+        >Igas Baking Corner
+      </a>✨
+    </p>
   </div>
 </Layout>

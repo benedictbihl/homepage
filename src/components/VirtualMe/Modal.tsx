@@ -5,10 +5,17 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   onOpen?: () => void;
+  preventCloseOnClickOutside?: boolean;
   children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onOpen, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  onOpen,
+  preventCloseOnClickOutside,
+  children,
+}) => {
   const [isEntering] = useState(false);
   const [isLeaving] = useState(false);
 
@@ -16,24 +23,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onOpen, children }) => {
     onOpen && isOpen && onOpen();
   }, [isOpen]);
 
-  useEffect(() => {
-    //handle escape key
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
-    };
-    document.addEventListener("keydown", handleEscape);
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [onClose]);
-
   return (
     <>
       {isOpen && (
         <div
-          className={`fixed inset-0 transition-opacity flex items-center justify-center ${
+          className={`fixed inset-0 transition-opacity flex items-center justify-center z-50 ${
             isEntering ? "ease-out duration-300 opacity-100" : "opacity-0"
           } ${isLeaving ? "ease-in duration-200 opacity-0" : "opacity-100"}`}
           aria-hidden={!isOpen}
@@ -41,7 +35,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onOpen, children }) => {
         >
           <div
             className="absolute inset-0 bg-black opacity-20"
-            onClick={() => onClose()}
+            onClick={() => !preventCloseOnClickOutside && onClose()}
           ></div>
           <AnimatePresence>
             <motion.div
