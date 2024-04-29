@@ -1,4 +1,10 @@
-import { FormEvent, useCallback, useState, useEffect, useRef } from "react";
+import {
+  type FormEvent,
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+} from "react";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { HumanMessage, AIMessage } from "langchain/schema";
 import { ChatMessageHistory } from "langchain/stores/message/in_memory";
@@ -80,10 +86,15 @@ const ChatContainer = () => {
               setOutput((o) => o + ev.data); // we use this to show the answer while it's streaming in
               answer += ev.data; // we use this to save the answer to the conversation object
             },
+            onerror(err) {
+              throw new Error(err);
+            },
           }
         );
       } catch (error) {
         console.error(error);
+        answer =
+          "Uhh.. looks like i'm on hibernation right now 😬 Try reminding Benedict to reactivate me?";
       } finally {
         setInflight(false);
         setOutput("");

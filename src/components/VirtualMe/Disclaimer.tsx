@@ -1,4 +1,4 @@
-import { useState, useRef, FC } from "react";
+import { useState, useRef, type FC } from "react";
 import Modal from "./Modal";
 
 interface DisclaimerProps {

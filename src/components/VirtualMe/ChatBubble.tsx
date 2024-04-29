@@ -16,7 +16,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message }) => {
       }`}
       aria-label={`chat message from ${type === "human" ? "you" : "VirtualMe"}`}
     >
-      {content}
+      <>{content}</>
     </li>
   );
 };
