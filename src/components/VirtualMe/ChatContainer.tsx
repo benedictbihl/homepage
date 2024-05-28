@@ -153,9 +153,9 @@ const ChatContainer = () => {
               disabled={inflight}
             />
             <button
-              className="ml-2 p-4 bg-black text-white rounded-full font-semibold disabled:cursor-not-allowed disabled:bg-black hover:bg-primary focus:bg-primary"
+              className="ml-2 p-4 bg-black text-white rounded-full font-semibold disabled:cursor-not-allowed disabled:bg-gray-500 hover:bg-primary focus:bg-primary"
               type="submit"
-              disabled={inflight}
+              disabled={inflight || !input}
             >
               {inflight ? (
                 <Icon icon="mdi:loading" className="animate-spin h-5 w-5" />

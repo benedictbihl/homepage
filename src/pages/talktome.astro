@@ -1,8 +1,8 @@
 ---
 import ChatContainer from "../components/VirtualMe/ChatContainer";
-import LayoutChat from "../layouts/LayoutChat.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<LayoutChat title="Talk to me!">
+<Layout title="Talk to me!">
   <ChatContainer client:only="react" />
-</LayoutChat>
+</Layout>

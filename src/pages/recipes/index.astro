@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const blogEntries = await getCollection("recipes");
+---
+
+<Layout title="Igas Baking Corner">
+  <div class="max-w-5xl mx-auto text-center mt-12 md:mt-16 grow flex flex-col">
+    <h1 class="text-4xl md:text-6xl font-medium mb-7 md:mb-12">Igas Baking Corner 🍰</h1>
+    <p>🚧 Under Construction 🚧</p>
+    <!-- {
+      blogEntries.map((entry) => (
+        <ol class="list-decimal list-inside">
+          <li class="underline hover:text-primary focus:text-primary text-xl">
+            <a  href={"/recipes/" + entry.slug}>{entry.data.title}</a>
+          </li>
+        </ol>
+      ))
+    } -->
+  </div>
+</Layout>

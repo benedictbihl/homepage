@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("recipes");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <div class="max-w-5xl mx-auto text-center mt-12 md:mt-16 grow flex flex-col">
+    <h1>{entry.data.title}</h1>
+    <Content />
+    <a href="/recipes" class="underline hover:text-primary focus:text-primary text-xl">Back to the list of recipes</a>
+  </div>
+</Layout>
