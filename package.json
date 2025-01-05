@@ -1,4 +1,5 @@
 {
+  "packageManager": "pnpm@9.0.6",
   "name": "homepage",
   "type": "module",
   "version": "0.0.1",
